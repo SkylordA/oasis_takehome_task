@@ -1,0 +1,1 @@
+from .gethurricaneloss import main
