@@ -18,3 +18,9 @@ cd <this-repository>
 pip install .
 gethurricaneloss -h #To test it works and find out the arguments
 ```
+
+### Benchmarking
+If you want to generate the benchmark.png image run the following:
+```bash
+python3 scripts/benchmark.py
+```
