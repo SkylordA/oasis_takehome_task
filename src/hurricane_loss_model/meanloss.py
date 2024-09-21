@@ -2,7 +2,7 @@ import logging
 import numpy as np
 
 from typing import Tuple, Union
-from .simulators import _estimate_mean_loss_default, _estimate_mean_loss_loopless
+from .simulators import _estimate_mean_loss_default, _estimate_mean_loss_loopless, _estimate_mean_loss_numba
 
 SIMULATORS = {
     "default": (
@@ -12,7 +12,11 @@ SIMULATORS = {
     "loopless": (
         _estimate_mean_loss_loopless,
         "Monte Carlo simulation without any loops",
-    )
+    ),
+    "numba": {
+        _estimate_mean_loss_numba,
+        "Monte Carlo simulation, no loops, with numba parallel and fastmath"
+    }
 }
 
 
@@ -51,6 +55,7 @@ def estimate_mean_loss(
         florida_landfall_rate, florida_mean, florida_stddev,
         gulf_landfall_rate, gulf_mean, gulf_stddev, num_samples
     )
+    logging.info(f"Total loss per year: {mean_loss}")
     if debug:
         logging.info(f"End of simulation, time taken: {time:.4f} seconds.")
         return mean_loss, time

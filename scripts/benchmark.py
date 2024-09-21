@@ -10,33 +10,42 @@ def benchmark():
     gulf_mean = 1.8
     gulf_stddev = 0.6
     
-    runtimes = {k: [] for k in SIMULATORS}
+    results = {k: [] for k in SIMULATORS}
 
     for simulator, (func, desc) in SIMULATORS.items():
         print(f"Running simulator {simulator}")
-        for n in range(1, 7):
+        for n in range(1, 8):
             num_samples = 10 ** n
             print(f" - Sample size {num_samples}")
             res, time = func(
                 florida_landfall_rate, florida_mean, florida_stddev,
                 gulf_landfall_rate, gulf_mean, gulf_stddev, num_samples
             )
-            runtimes[simulator].append([num_samples, time * 1000])
+            results[simulator].append([num_samples, res, time * 1000])
 
-    plt.figure(figsize=(10, 6))
+    fig, axs = plt.subplots(2, 1, figsize=(10, 12))
 
-    for simulator_name, data in runtimes.items():
+    for simulator_name, data in results.items():
         num_samples = [item[0] for item in data]
-        runtimes = [item[1] for item in data]
-        plt.plot(num_samples, runtimes, marker="o", label=simulator_name)
+        results = [item[1] for item in data]
+        runtimes = [item[2] for item in data]
+        axs[0].plot(num_samples, runtimes, marker="o", label=simulator_name)
+        axs[1].plot(num_samples, results, marker="o", label=simulator_name)
 
-    plt.xlabel("Number of Samples")
-    plt.ylabel("Runtime (milliseconds)")
-    plt.title("Runtime vs Number of Samples for Different Simulators")
-    plt.xscale("log")
-    plt.yscale("log")
-    plt.legend()
-    plt.grid(True)
+    axs[0].set_xlabel("Number of Samples")
+    axs[0].set_xlabel("Runtime (milliseconds)")
+    axs[0].set_title("Runtime vs Number of Samples for Different Simulators")
+    axs[0].set_xscale("log")
+    axs[0].set_yscale("log")
+    axs[0].legend()
+    axs[0].grid(True)
+
+    axs[1].set_xlabel("Number of Samples")
+    axs[1].set_xlabel("Loss in $Billions")
+    axs[1].set_title("Loss in $Billions vs Number of Samples for Different Simulators")
+    axs[1].set_xscale("log")
+    axs[1].legend()
+    axs[1].grid(True)
 
     plt.savefig("benchmark.png", format="png")
     
