@@ -13,10 +13,10 @@ SIMULATORS = {
         _estimate_mean_loss_loopless,
         "Monte Carlo simulation without any loops",
     ),
-    "numba": {
+    "numba": (
         _estimate_mean_loss_numba,
         "Monte Carlo simulation, no loops, with numba parallel and fastmath"
-    }
+    )
 }
 
 
