@@ -62,7 +62,7 @@ def parse_args() -> Dict:
     parser.add_argument(
         "-t", "--timer",
         action="store_true",
-        help="Log the execution time in the info"
+        help="Output the execution time"
     )
     parser.add_argument(
         "-v", "--verbose",
