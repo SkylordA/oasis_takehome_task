@@ -1,2 +1,2 @@
-# oasis_takehome_task
-Oasis technical test – Python
+# Oasis technical test – Python
+See Oasis_tech_test_Python.pdf for task details
