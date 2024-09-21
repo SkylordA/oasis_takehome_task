@@ -60,6 +60,11 @@ def parse_args() -> Dict:
             {"\n".join([" - " + k + ": " + v[1] for k, v in SIMULATORS.items()])}\n"
     )
     parser.add_argument(
+        "-t", "--timer",
+        action="store_true",
+        help="Log the execution time in the info"
+    )
+    parser.add_argument(
         "-v", "--verbose",
         action="store_true",
         help="Increase Verbosity"
@@ -120,16 +125,30 @@ def get_hurricane_loss():
         raise ValueError("Program stopped, Invalid arguments")
 
     # Run the simulation
-    mean_loss = estimate_mean_loss(
-        args["florida_landfall_rate"],
-        args["florida_mean"],
-        args["florida_stddev"],
-        args["gulf_landfall_rate"],
-        args["gulf_mean"],
-        args["gulf_stddev"],
-        args["num_monte_carlo_samples"],
-        args["simulator"],
-    )
+    if args["timer"]:
+        mean_loss, time = estimate_mean_loss(
+            args["florida_landfall_rate"],
+            args["florida_mean"],
+            args["florida_stddev"],
+            args["gulf_landfall_rate"],
+            args["gulf_mean"],
+            args["gulf_stddev"],
+            args["num_monte_carlo_samples"],
+            args["simulator"],
+            True
+        )
+        print(f"Finished Simulation, execution time: {time:.4f} seconds")
+    else:
+        mean_loss = estimate_mean_loss(
+            args["florida_landfall_rate"],
+            args["florida_mean"],
+            args["florida_stddev"],
+            args["gulf_landfall_rate"],
+            args["gulf_mean"],
+            args["gulf_stddev"],
+            args["num_monte_carlo_samples"],
+            args["simulator"]
+        )
 
     print(f"Estimated Average Annual Loss: ${mean_loss:.2f} Billion")
 
