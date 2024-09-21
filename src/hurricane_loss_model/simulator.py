@@ -2,8 +2,15 @@ import logging
 import numpy as np
 
 
-def estimate_mean_loss(florida_landfall_rate, florida_mean, florida_stddev,
-                              gulf_landfall_rate, gulf_mean, gulf_stddev, num_samples):
+def estimate_mean_loss(
+        florida_landfall_rate: float,
+        florida_mean: float,
+        florida_stddev: float,
+        gulf_landfall_rate: float,
+        gulf_mean: float,
+        gulf_stddev: float,
+        num_samples: int 
+    ) -> float:
     """
     Simulate the average annual hurricane losses using Monte Carlo method.
     Parameters:
