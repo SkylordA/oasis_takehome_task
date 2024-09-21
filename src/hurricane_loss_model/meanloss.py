@@ -1,20 +1,19 @@
 import logging
-import numpy as np
 
 from typing import Tuple, Union
-from .simulators import _estimate_mean_loss_default, _estimate_mean_loss_loopless, _estimate_mean_loss_numba
+from .simulators import simulate_default, simulate_loopless, simulate_numba
 
 SIMULATORS = {
     "default": (
-        _estimate_mean_loss_default,
+        simulate_default,
         "Basic monte carlo simulation using for loops"
     ),
     "loopless": (
-        _estimate_mean_loss_loopless,
+        simulate_loopless,
         "Monte Carlo simulation without any loops",
     ),
     "numba": (
-        _estimate_mean_loss_numba,
+        simulate_numba,
         "Monte Carlo simulation, no loops, with numba parallel and fastmath"
     )
 }

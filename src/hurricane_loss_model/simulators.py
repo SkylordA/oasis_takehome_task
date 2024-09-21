@@ -6,7 +6,7 @@ from .utils import timer
 
 
 @timer
-def _estimate_mean_loss_default(
+def simulate_default(
         florida_landfall_rate: float,
         florida_mean: float,
         florida_stddev: float,
@@ -34,7 +34,7 @@ def _estimate_mean_loss_default(
     return total_loss / num_samples
 
 @timer
-def _estimate_mean_loss_loopless(
+def simulate_loopless(
         florida_landfall_rate: float,
         florida_mean: float,
         florida_stddev: float,
@@ -63,7 +63,7 @@ def _estimate_mean_loss_loopless(
 
 @timer
 @njit(parallel=True, fastmath=True)
-def _estimate_mean_loss_numba(
+def simulate_numba(
         florida_landfall_rate: float,
         florida_mean: float,
         florida_stddev: float,

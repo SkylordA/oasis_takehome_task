@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from hurricane_loss_model.meanloss import SIMULATORS
-from hurricane_loss_model.simulators import _estimate_mean_loss_default, _estimate_mean_loss_loopless
 
 def benchmark():
     florida_landfall_rate = 1.5
