@@ -1,1 +1,1 @@
-from .gethurricaneloss import main
+from .gethurricaneloss import get_hurricane_loss

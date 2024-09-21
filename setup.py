@@ -23,7 +23,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'gethurricaneloss=hurricane_loss_model.gethurricaneloss:main',
+            'gethurricaneloss=hurricane_loss_model.gethurricaneloss:get_hurricane_loss',
         ],
     },
 )
